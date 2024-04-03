@@ -1,0 +1,20 @@
+思岚mapper2的使用
+一、首先下载相应的sdk安装包
+https://www.slamtec.com/cn/support#rplidar-mapper
+二、创建工作空间：catkin_ws以及src
+cd catkin_ws/src
+catkin_init_workspace
+三、编译
+cd ..
+catkin_make
+四、配置工作空间系统环境
+source devel/setup.bash
+五、启动节点
+若移动机器人处于AP模式，连接机器人WIFI，启动节点
+roslaunch slamware_ros_sdk slamware_ros_sdk_server_node.launch ip_address:=192.168.11.1
+通过rviz查看
+roslaunch slamware_ros_sdk view_slamware_ros_sdk_server_node.launch
+rosrun map_server map_saver -f ~/my_map（保存到主目录下，可以改动）
+保存地图时一直出现waitting for the map的错误
+出现原因：出现这种情况大概率是map saver订阅的topic与本地地图的topic不同导致，查看话题列表：rostopic list（检查建图节点的订阅者和发布者是否正确设置）
+解决方案：仍需要在重新解决
